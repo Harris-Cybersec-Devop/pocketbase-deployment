@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocketbase
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pocketbase
+  template:
+    metadata:
+      labels:
+        app: pocketbase
+    spec:
+      containers:
+      - name: pocketbase
+        image: harriscybersecdevop/pocketbase:latest
+        ports:
+        - containerPort: 8090
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pocketbase-service
+spec:
+  selector:
+    app: pocketbase
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+  type: NodePort

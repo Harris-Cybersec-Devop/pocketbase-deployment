@@ -1,0 +1,7 @@
+- name: Deploy PocketBase on local Kubernetes
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Apply Kubernetes manifests
+      command: kubectl apply -f /path/to/k8s/
